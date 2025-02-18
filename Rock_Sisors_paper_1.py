@@ -24,27 +24,6 @@ R_S_P_dict = {
     PAPER:"бумага"
     }
 
-def test_win_men_str(men_choice, PS_choice) -> str:
-    '''
-    Проверяет выиграл ли игрок.
-
-    '''
-    if men_choice == ROCK and PS_choice == SCISSORS:
-        return "Ты выиграл"
-    if men_choice == SCISSORS and PS_choice == PAPER:
-       return "Ты выиграл"
-    if men_choice == PAPER and PS_choice == ROCK:
-        return "Ты выиграл"
-    if men_choice == ROCK and PS_choice == PAPER:
-        return "Ты проиграл"
-    if men_choice == SCISSORS and PS_choice == ROCK:
-        return "Ты проиграл"
-    if men_choice == PAPER and PS_choice == SCISSORS:
-        return "Ты проиграл"
-
-    if men_choice == PS_choice:
-        return "Ничья"
-
 def print_result(res: GameResult):
     if res == GameResult.Drew:
        print("Ничья")
@@ -53,29 +32,22 @@ def print_result(res: GameResult):
     else:
         print("Ты проиграл")     
 
-def test_win_men(men_choice, PS_choice) -> GameResult:
-    '''
+def test_win_men(m_choice, pc_choice) -> GameResult:
+    """
     Проверяет выиграл ли игрок.
 
-    '''
-    if men_choice == ROCK and PS_choice == SCISSORS:
-        return GameResult.Win
-    if men_choice == SCISSORS and PS_choice == PAPER:
-       return GameResult.Win
-    if men_choice == PAPER and PS_choice == ROCK:
-        return GameResult.Win
-
-    if men_choice == ROCK and PS_choice == PAPER:
-        return GameResult.Lost
-
-    if men_choice == SCISSORS and PS_choice == ROCK:
-        return GameResult.Lost
-    if men_choice == PAPER and PS_choice == SCISSORS:
-        return GameResult.Lost
-
-    if men_choice == PS_choice:
+    """
+    if m_choice == PS_choice:
         return GameResult.Drew
 
+    if m_choice == ROCK and pc_choice == SCISSORS:
+        return GameResult.Win
+    if m_choice == SCISSORS and pc_choice == PAPER:
+       return GameResult.Win
+    if m_choice == PAPER and pc_choice == ROCK:
+        return GameResult.Win
+
+    return GameResult.Lost
 
 def get_men_choice():
     m_choice = input(f"Напишите {ROCK} чтобы выбрать камень, {SCISSORS} чтобы ножницы, {PAPER} чтобы бумагу ")
