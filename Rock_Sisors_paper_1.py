@@ -1,9 +1,10 @@
 from enum import Enum
 import random
-colvo_raunds = 5
-raunds_win = 3
-# print("jglkdjgldkf", b, c)
-# print(f"hello {name}")
+#import math
+#import enum
+
+count_rounds = 5
+rounds_win = 3
 
 class GameResult(Enum):
 
@@ -104,20 +105,16 @@ def get_pc_choice(prev_men_state: GameResult, prev_choice: str) -> str:
 
 
 
-print(f"Привет это игра камень ножницы бумага каждая игра состоит из {colvo_raunds}  раундов выйграв в {raunds_win} вы или копьютер автамотически выйгрываете")
+print(f"Привет это игра камень ножницы бумага каждая игра состоит из {count_rounds}  раундов выйграв в {rounds_win} вы или копьютер автамотически выйгрываете")
 
-men_choice = get_men_choice()
+PS_choice = None
+result = GameResult.Drew
 
-PS_choice = random.choice(R_S_P)
-print("Компьютер выбирает", R_S_P_dict[PS_choice])
+pc_win_games = 0
+men_win_games = 0
+for round_number in range(count_rounds):
+    print(f"Раунд {round_number+1}")
 
-result = test_win_men(men_choice, PS_choice)
-print_result(result)
-
-while True:
-    answer = input("Продолжим? yes(y)/no(n): ")
-    if answer == 'n':
-        break
     men_choice = get_men_choice()
     PS_choice = get_pc_choice(result, PS_choice)
     print("Компьютер выбирает", R_S_P_dict[PS_choice])
@@ -125,3 +122,27 @@ while True:
     result = test_win_men(men_choice, PS_choice)
 
     print_result(result)
+
+    if result == GameResult.Win:
+        men_win_games += 1
+    elif result == GameResult.Lost:
+        pc_win_games += 1
+
+    print(f"men wins = {men_win_games}, pc wins = {pc_win_games}")
+
+    if men_win_games == rounds_win or pc_win_games == rounds_win:
+        break
+
+    answer = input("Продолжим? yes(y)/no(n): ")
+    if answer == 'n':
+        break
+
+print("Игра закончена. Итог:")
+
+if pc_win_games == men_win_games:
+    print("Ничья")
+elif pc_win_games > men_win_games:
+    print("Выиграл ПК")
+else:
+    print("Выиграл игрок")
+
