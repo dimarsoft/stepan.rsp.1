@@ -38,7 +38,7 @@ def print_result(res: GameResult):
 
 def test_win_men(m_choice, pc_choice) -> GameResult:
     """
-    Проверяет выиграл ли игрок.
+    Проверяет, выиграл ли игрок.
 
     """
     if m_choice == PS_choice:
@@ -95,7 +95,7 @@ def count_round_for_win_first(total_rounds: int) -> int:
     else:
         return int(total_rounds / 2 + 0.5)
 
-print(f"Привет это игра камень ножницы бумага каждая игра состоит из {count_rounds}  раундов выйграв в {rounds_win} вы или копьютер автамотически выйгрываете")
+print(f"Привет это игра камень ножницы бумага каждая игра состоит из {count_rounds}  раундов выйграв в {rounds_win} вы или компьютер автоматически выйгрываете")
 
 PS_choice = None
 result = GameResult.Drew
