@@ -126,9 +126,12 @@ for round_number in range(count_rounds):
     if men_win_games == rounds_win or pc_win_games == rounds_win:
         break
 
-    user_answer = get_continue_state()
-    if not user_answer:
-        break
+    # если раунд последний, то не спрашиваем о продолжении
+
+    if round_number != count_rounds - 1:
+        user_answer = get_continue_state()
+        if not user_answer:
+            break
 
 print("Игра закончена. Итог:")
 
