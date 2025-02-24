@@ -75,6 +75,15 @@ def get_pc_choice(prev_men_state: GameResult, prev_choice: str) -> str:
         return ROCK
     return SCISSORS
 
+def get_continue_state() -> bool:
+    while True:
+        answer = input("Продолжим? yes(y)/no(n): ")
+        if answer == 'n':
+            return False
+        if answer == 'y':
+            return True
+
+        print("Ошибка ввода: введите только 'y' или 'n'")
 
 
 print(f"Привет это игра камень ножницы бумага каждая игра состоит из {count_rounds}  раундов выйграв в {rounds_win} вы или копьютер автамотически выйгрываете")
@@ -84,6 +93,9 @@ result = GameResult.Drew
 
 pc_win_games = 0
 men_win_games = 0
+
+user_answer = None
+
 for round_number in range(count_rounds):
     print(f"Раунд {round_number+1}")
 
@@ -105,16 +117,19 @@ for round_number in range(count_rounds):
     if men_win_games == rounds_win or pc_win_games == rounds_win:
         break
 
-    answer = input("Продолжим? yes(y)/no(n): ")
-    if answer == 'n':
+    user_answer = get_continue_state()
+    if not user_answer:
         break
 
 print("Игра закончена. Итог:")
 
-if pc_win_games == men_win_games:
-    print("Ничья")
-elif pc_win_games > men_win_games:
-    print("Выиграл ПК")
+if not user_answer:
+    print("Выход из раунда означает поражение. Вы проиграли")
 else:
-    print("Выиграл игрок")
+    if pc_win_games == men_win_games:
+        print("Ничья")
+    elif pc_win_games > men_win_games:
+        print("Выиграл ПК")
+    else:
+        print("Выиграл игрок")
 
