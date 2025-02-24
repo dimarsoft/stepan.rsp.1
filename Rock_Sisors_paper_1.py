@@ -1,10 +1,14 @@
 from enum import Enum
 import random
-#import math
-#import enum
+
+def count_round_for_win(total_rounds: int) -> int:
+    """
+    Определение количества раундов, необходимых для победы.
+    """
+    return total_rounds // 2 + 1
 
 count_rounds = 5
-rounds_win = 3
+rounds_win = count_round_for_win(count_rounds)
 
 class GameResult(Enum):
 
@@ -85,6 +89,11 @@ def get_continue_state() -> bool:
 
         print("Ошибка ввода: введите только 'y' или 'n'")
 
+def count_round_for_win_first(total_rounds: int) -> int:
+    if total_rounds % 2 == 0:
+        return int(total_rounds / 2 + 1)
+    else:
+        return int(total_rounds / 2 + 0.5)
 
 print(f"Привет это игра камень ножницы бумага каждая игра состоит из {count_rounds}  раундов выйграв в {rounds_win} вы или копьютер автамотически выйгрываете")
 
